@@ -6,23 +6,34 @@ DELL XPS 13, Laptop, 26799000
 Xiaomi Mi 6, Smartphone, 5399000
 LG V30 Plus, Smartphone, 10499000`
 
-var firstArr = [];
-var objPropName = [];
-var objPropVal = [];
-var objArray = [];
+function csvToJson(csv) {
+    let firstArr = [];
+    let objPropName = [];
+    let objArray = [];
 
-firstArr = data.split("\n");
+    firstArr = csv.split("\n");
 
-objPropName = firstArr[0].split(", ");
+    objPropName = firstArr[0].split(",");
 
-for (var i = 1; i <= (firstArr.length - 1); i++) {
-    var tempProp = firstArr[i].split(", ");
-    var obj = {};
-    for (var j = 0; j <= (tempProp.length - 1); j++) {
-        obj[objPropName[j].trim()] = tempProp[j].trim();
+    for (let i = 1; i <= (firstArr.length - 1); i++) {
+        let tempProp = firstArr[i].split(",");
+        let obj = {};
+        for (let j = 0; j <= (tempProp.length - 1); j++) {
+            obj[objPropName[j].trim()] = tempProp[j].trim();
+        }
+        objArray.push(obj);
     }
-    objArray.push(obj);
+    objArray.sort(function (a, b) {
+        if (parseInt(a.PRICE) < parseInt(b.PRICE)) return -1
+        if (parseInt(a.PRICE) > parseInt(b.PRICE)) return 1
+        return 0
+    })
+
+    for (let j = 0; j <= (objArray.length - 1); j++) {
+        objArray[j].PRICE = ("Rp" + parseInt(objArray[j].PRICE).toString().replace(/\d(?=(\d{3})+$)/g, '$&.'));
+    }
+
+    return JSON.stringify(objArray);
 }
 
-objArray.sort();
-
+console.log(csvToJson(data));

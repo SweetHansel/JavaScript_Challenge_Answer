@@ -18,21 +18,22 @@ Doraemon
 La... la... la...
 Aku sayang sekali
 `
-var arrayToCount = [];
-var count = 0;
+let arrayToCount = [];
+let count = 0;
 
-arrayToCount = data.toUpperCase().split("\n").join(" ").split(" ");
+arrayToCount = data.toUpperCase().split(/[\s\n]/g);
 
 function howMany(str) {
     count = 0;
-    for (var i = 0; i <= arrayToCount.length; i++) {
+    for (let i = 0; i <= arrayToCount.length; i++) {
         if((arrayToCount[i]) == str.toUpperCase()){
             count++}
     }
-    console.log(count);
+    return count;
 }
 
+console.log(howMany('aku'));
+console.log(howMany('ingin'));
+console.log(howMany('begini'));
 
-howMany('aku');
-howMany('ingin');
-howMany('begini');
+

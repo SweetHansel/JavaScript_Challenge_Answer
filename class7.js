@@ -20,25 +20,26 @@ class Str {
     }
 
     contains(stringIn, stringComp) {
-        var isIt = true;
+        var isIt = false;
         if (Array.isArray(stringComp)) {
-            for (var j = 0; j <= stringComp.length; j++) {
-                if (pos <= -1) {
-                    isIt = false;
+            for (var j = 0; j <= stringComp.length - 1; j++) {
+                var pos = stringIn.indexOf(stringComp[j]);
+                console.log(pos);
+
+                if (pos >= 0) {
+                    isIt = true;
                 }
             }
         } else {
             var pos = stringIn.indexOf(stringComp);
-
-            if (pos <= -1) {
-                isIt = false;
+            if (pos >= 0) {
+                isIt = true;
             }
         }
         return isIt;
     }
 
-    random(number) {
-        if (number == null) { number = 16 }
+    random(number = 16) {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -46,15 +47,12 @@ class Str {
         return text;
     }
 
-    slug(slugged, sluggy) {
-        if (sluggy == null) { sluggy = '-' }
+    slug(slugged, sluggy = '-') {
         return slugged.toString().toLowerCase()
-            .replace(/\s+/g, '-')           // Replace spaces with -
-            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-            .replace(/^-+/, '')             // Trim - from start of text
-            .replace(/-+$/, '')
-            .replace(/\-+/g,sluggy);
+            .replace(/\W/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/\-+$/g, '')
+            .replace(/\-/g, sluggy);
     }
 
     count(toCoun) {
@@ -67,15 +65,13 @@ class Str {
         return arr.length;
     }
 
-    trim(toTrim, trimLeng, addStr) {
-        if (trimLeng == null) { trimLeng = 99 }
-        if (addStr == null) { addStr = '...' }
+    trim(toTrim, trimLeng = 99, addStr = '...') {
+        if (toTrim.length <= trimLeng) { addStr = '' }
         return (toTrim.substr(0, trimLeng) + addStr);
     }
 
-    trimWords(toTrW, trWLeng, addStr) {
-        if (trWLeng == null) { trWLeng = 30 }
-        if (addStr == null) { addStr = '...' }
+    trimWords(toTrW, trWLeng = 30, addStr = '...') {
+        if (toTrW.length <= trWLeng) { addStr = '' }
         var arr = toTrW.split(" ");
         for (var i = trWLeng; i <= arr.length - 1; i++) { arr.splice(i) };
         return (arr.join(" ") + addStr);
@@ -84,35 +80,29 @@ class Str {
 }
 
 Str = new Str;
-
-Str.lower('MAKAN'); // makan
-Str.upper('malam'); // MALAM
-Str.capitalize('saya ingin makan'); // Saya Ingin Makan
-Str.reverse('kasur'); // rusak
-Str.contains('Saya ingin makan sate', 'makan'); // true
-Str.contains('Saya ingin makan sate', 'rujak'); // false
-Str.contains('Saya ingin makan sate', ['sate', 'rujak']); // true
-Str.random();   // hef2nCi273c8D2dz
-Str.random(6);  // ckS3jP
-Str.random(32); // tbFGeCycTBy8FTfXqOTkDd0YtlQngLt4
 const title = 'JavaScript, TypeScript & Dart - Bahasa mana yang akan populer di 2018?';
-Str.slug(title);      // javascript-typescript-dart-bahasa-mana-yang-akan-populer-di-2018
-Str.slug(title, '_'); // javascript_typescript_dart_bahasa_mana_yang_akan_populer_di_2018
-Str.count('lorem ipsum'); // 11
-Str.countWords('lorem ipsum'); // 2
 const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-Str.trim('Less than 100 characters') // Less than 100 characters
 
-Str.trim(text) // Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...
 
-Str.trim(text, 20) // Lorem ipsum dolor si...
-
-Str.trim(text, 20, '·····') // Lorem ipsum dolor si·····
-
-Str.trimWords('Less than 30 words') // Less than 30 words
-
-Str.trimWords(text) // Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi...
-
-Str.trimWords(text, 3) // Lorem ipsum dolor...
-
-Str.trimWords(text, 3, '·····') // Lorem ipsum dolor·····
+console.log(Str.lower('MAKAN'));
+console.log(Str.upper('malam'));
+console.log(Str.capitalize('saya ingin makan'));
+console.log(Str.reverse('kasur'));
+console.log(Str.contains('Saya ingin makan sate', 'makan'));
+console.log(Str.contains('Saya ingin makan sate', 'rujak'));
+console.log(Str.contains('Saya ingin makan sate', ['sate', 'rujak']));
+console.log(Str.random());
+console.log(Str.random(6));
+console.log(Str.random(32));
+console.log(Str.slug(title));
+console.log(Str.slug(title, '_'));
+console.log(Str.count('lorem ipsum'));
+console.log(Str.countWords('lorem ipsum'));
+console.log(Str.trim('Less than 100 characters'));
+console.log(Str.trim(text));
+console.log(Str.trim(text, 20));
+console.log(Str.trim(text, 20, '·····'));
+console.log(Str.trimWords('Less than 30 words'));
+console.log(Str.trimWords(text));
+console.log(Str.trimWords(text, 3));
+console.log(Str.trimWords(text, 3, '·····'));

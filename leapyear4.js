@@ -1,7 +1,3 @@
-
-var y = isLeapYear(2018);
-
-
 function isLeapYear(year) {
     let x = false;
     if (year % 4 != 0) {
@@ -22,3 +18,6 @@ function isLeapYear(year) {
     }
     return x;
 }
+
+console.log(isLeapYear(2004));
+console.log(isLeapYear(2018));

@@ -1,8 +1,8 @@
-var even = [];
-var odd = [];
-var fives = [];
-var prime = [];
-var x, i;
+let even = [];
+let odd = [];
+let fives = [];
+let prime = [];
+let x, i;
 
 for (i = 0; i <= 100; i++) {
     if (i % 2 == 0) {
@@ -15,7 +15,7 @@ for (i = 0; i <= 100; i++) {
     // prima dibawah ini
     x = true;
     if (i != 0) {
-        for (var j = 2; j <= i; j++) {
+        for (let j = 2; j <= i; j++) {
             if (x && (i != j) && (i % j == 0)) {
                 x = false;
             }
