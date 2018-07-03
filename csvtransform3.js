@@ -12,26 +12,29 @@ function csvToJson(csv) {
     let objArray = [];
 
     firstArr = csv.split("\n");
-
+    
     objPropName = firstArr[0].split(",");
+    let throwaway = firstArr.shift();
 
-    for (let i = 1; i <= (firstArr.length - 1); i++) {
-        let tempProp = firstArr[i].split(",");
+    firstArr.forEach((a) => {
+        let tempProp = a.split(",");
         let obj = {};
-        for (let j = 0; j <= (tempProp.length - 1); j++) {
-            obj[objPropName[j].trim()] = tempProp[j].trim();
-        }
+        
+        tempProp.forEach((b,c) => {
+            obj[objPropName[c].trim()] = b.trim();
+        });
         objArray.push(obj);
-    }
-    objArray.sort(function (a, b) {
+    });
+
+    objArray.sort((a, b) => {
         if (parseInt(a.PRICE) < parseInt(b.PRICE)) return -1
         if (parseInt(a.PRICE) > parseInt(b.PRICE)) return 1
         return 0
     })
 
-    for (let j = 0; j <= (objArray.length - 1); j++) {
-        objArray[j].PRICE = ("Rp" + parseInt(objArray[j].PRICE).toString().replace(/\d(?=(\d{3})+$)/g, '$&.'));
-    }
+    objArray.forEach((a) => {
+        a.PRICE = ("Rp" + parseInt(a.PRICE).toString().replace(/\d(?=(\d{3})+$)/g, '$&.'));
+    });
 
     return JSON.stringify(objArray);
 }
