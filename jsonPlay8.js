@@ -60,11 +60,12 @@ let arrOrd = JSON.parse(json);
 arrOrd.forEach((a) => {
     a.created_at = new Date(a.created_at);
 });
-
-let onlyFeb = arrOrd.filter((a) => {
-    return a.created_at.getMonth() == 1;
-})
-
+function filterMonth(month) {
+    let onlyMonth = arrOrd.filter((a) => {
+        return a.created_at.getMonth() == month;
+    })
+    return onlyMonth;
+}
 function itsMe(nama) {
     let onlyPerson = arrOrd.filter((a) => {
         return a.customer.name === nama;
@@ -76,7 +77,7 @@ function payUp(arrayToPay) {
     let sum = 0;
     arrayToPay.forEach((a) => {
         a.items.forEach((d) => {
-            sum += parseInt(d.price)*parseInt(d.qty);
+            sum += (d.price) * (d.qty);
         })
     })
     return sum;
@@ -100,9 +101,7 @@ function whatSMyName(someOrd) {
     });
     return myName;
 }
-
-// arrOrd
-// onlyFeb
-console.log(onlyFeb);
-console.log(payUp(itsMe('Ari')));
-console.log(whatSMyName(underWhat(300000)));
+console.log("Nama Semua : ",whatSMyName(arrOrd))
+console.log("Di Bulan Februari : ",filterMonth(1));
+console.log("Ari Berhutang : ",payUp(itsMe('Ari')));
+console.log("Murahan : ",whatSMyName(underWhat(300000)));

@@ -73,8 +73,8 @@ class Str {
     trimWords(toTrW, trWLeng = 30, addStr = '...') {
         if (toTrW.length <= trWLeng) { addStr = '' }
         var arr = toTrW.split(" ");
-        for (var i = trWLeng; i <= arr.length - 1; i++) { arr.splice(i) };
-        return (arr.join(" ") + addStr);
+        arr.length = trWLeng;
+        return arr.join(" ");
     }
 
 }
@@ -82,7 +82,6 @@ class Str {
 Str = new Str;
 const title = 'JavaScript, TypeScript & Dart - Bahasa mana yang akan populer di 2018?';
 const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-
 
 console.log(Str.lower('MAKAN'));
 console.log(Str.upper('malam'));
