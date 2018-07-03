@@ -19,15 +19,20 @@ La... la... la...
 Aku sayang sekali
 `
 var arrayToCount = [];
-var count;
+var count = 0;
 
-arrayToCount = data.split("\n").join(" ").split(" ");
+arrayToCount = data.toUpperCase().split("\n").join(" ").split(" ");
 
 function howMany(str) {
+    count = 0;
     for (var i = 0; i <= arrayToCount.length; i++) {
-        if(arrayToCount[i] == str){
-            count ++}
+        if((arrayToCount[i]) == str.toUpperCase()){
+            count++}
     }
     console.log(count);
 }
 
+
+howMany('aku');
+howMany('ingin');
+howMany('begini');
