@@ -11,12 +11,12 @@ for (i = 0; i <= 100; i++) {
         odd.push(i)
     }
     if (i % 5 == 0) { fives.push(i) }
-    
+
     // prima dibawah ini
     x = true;
-    if (i != 0) {
-        for (let j = 2; j <= i; j++) {
-            if (x && (i != j) && (i % j == 0)) {
+    if (i >= 1) {
+        for (let j = 2; j < i; j++) {
+            if (x && (i % j == 0)) {
                 x = false;
             }
         }
@@ -25,5 +25,5 @@ for (i = 0; i <= 100; i++) {
 }
 console.log(even);
 console.log(odd);
+console.log(fives);
 console.log(prime);
-
