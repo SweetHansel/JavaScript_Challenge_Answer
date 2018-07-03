@@ -57,26 +57,26 @@ const json = `[
 
 let arrOrd = JSON.parse(json);
 
-arrOrd.forEach((a, b, c) => {
-    c[b].created_at = new Date(c[b].created_at);
+arrOrd.forEach((a) => {
+    a.created_at = new Date(a.created_at);
 });
 
-let onlyFeb = arrOrd.filter((a, b, c) => {
-    return c[b].created_at.getMonth() == 1;
+let onlyFeb = arrOrd.filter((a) => {
+    return a.created_at.getMonth() == 1;
 })
 
 function itsMe(nama) {
-    let onlyPerson = arrOrd.filter((a, b, c) => {
-        return c[b].customer.name === nama;
+    let onlyPerson = arrOrd.filter((a) => {
+        return a.customer.name === nama;
     })
     return onlyPerson;
 }
 
 function payUp(arrayToPay) {
     let sum = 0;
-    arrayToPay.forEach((a, b, c) => {
-        c[b].items.forEach((d, e, f) => {
-            sum += parseInt(f[e].price);
+    arrayToPay.forEach((a) => {
+        a.items.forEach((d) => {
+            sum += parseInt(d.price)*parseInt(d.qty);
         })
     })
     return sum;
@@ -84,7 +84,7 @@ function payUp(arrayToPay) {
 
 function underWhat(totalMax) {
     let underThis = [];
-    whatSMyName(arrOrd).forEach((g, h, i) => {
+    whatSMyName(arrOrd).forEach((g) => {
         if (payUp(itsMe(g)) < totalMax) {
             underThis = underThis.concat(itsMe(g));
         }
@@ -93,8 +93,8 @@ function underWhat(totalMax) {
 }
 
 function whatSMyName(someOrd) {
-    let myName = someOrd.map((a, b, c) => {
-        return c[b].customer.name;
+    let myName = someOrd.map((a) => {
+        return a.customer.name;
     }).filter((value, index, self) => {
         return self.indexOf(value) === index;
     });
