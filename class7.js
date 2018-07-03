@@ -20,18 +20,17 @@ class Str {
     }
 
     contains(stringIn, stringComp) {
-        var isIt = false;
+        let isIt = false;
         if (Array.isArray(stringComp)) {
-            for (var j = 0; j <= stringComp.length - 1; j++) {
-                var pos = stringIn.indexOf(stringComp[j]);
-                console.log(pos);
-
-                if (pos >= 0) {
-                    isIt = true;
-                }
-            }
+            stringComp.forEach((a,b) => {
+                let pos = stringIn.indexOf(a);
+                    console.log(pos);
+                    if (pos >= 0) {
+                        isIt = true;
+                    }
+            });
         } else {
-            var pos = stringIn.indexOf(stringComp);
+            let pos = stringIn.indexOf(stringComp);
             if (pos >= 0) {
                 isIt = true;
             }
@@ -40,10 +39,10 @@ class Str {
     }
 
     random(number = 16) {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let text = "";
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-        for (var i = 0; i < number; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)); }
+        for (let i = 0; i < number; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)); }
         return text;
     }
 
@@ -56,12 +55,12 @@ class Str {
     }
 
     count(toCoun) {
-        var arr = toCoun.split("");
+        let arr = toCoun.split("");
         return arr.length;
     }
 
     countWords(toWor) {
-        var arr = toWor.split(" ");
+        let arr = toWor.split(" ");
         return arr.length;
     }
 
@@ -72,7 +71,7 @@ class Str {
 
     trimWords(toTrW, trWLeng = 30, addStr = '...') {
         if (toTrW.length <= trWLeng) { addStr = '' }
-        var arr = toTrW.split(" ");
+        let arr = toTrW.split(" ");
         arr.length = trWLeng;
         return arr.join(" ");
     }
