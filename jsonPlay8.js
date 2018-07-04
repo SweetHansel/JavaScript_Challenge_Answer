@@ -60,12 +60,10 @@ const arrOrd = JSON.parse(json);
 arrOrd.forEach(a => a.created_at = new Date(a.created_at));
 
 function filterMonth(month) {
-    let onlyMonth = arrOrd.filter(a => a.created_at.getMonth() == month);
-    return onlyMonth;
+    return     arrOrd.filter(a => a.created_at.getMonth() == month);
 }
 function itsMe(nama) {
-    let onlyPerson = arrOrd.filter(a => a.customer.name === nama);
-    return onlyPerson;
+    return arrOrd.filter(a => a.customer.name === nama);
 }
 function payUp(arrayToPay) {
     let sum = 0;
@@ -82,10 +80,9 @@ function underWhat(totalMax) {
     return underThis;
 }
 function whatSMyName(someOrd) {
-    let myName = someOrd
+    return someOrd
         .map(a => a.customer.name)
         .filter((value, index, self) => self.indexOf(value) === index);
-    return myName;
 }
 console.log("Nama Semua : ", whatSMyName(arrOrd))
 console.log("Di Bulan Februari : ", filterMonth(1));

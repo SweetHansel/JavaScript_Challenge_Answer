@@ -16,13 +16,11 @@ function csvToJson(csv) {
     objPropName = firstArr[0].split(",");
     let throwaway = firstArr.shift();
 
-    firstArr.forEach((a) => {
+    firstArr.forEach(a => {
         let tempProp = a.split(",");
         let obj = {};
         
-        tempProp.forEach((b,c) => {
-            obj[objPropName[c].trim()] = b.trim();
-        });
+        tempProp.forEach((b,c) => obj[objPropName[c].trim()] = b.trim());
         objArray.push(obj);
     });
 
@@ -32,9 +30,7 @@ function csvToJson(csv) {
         return 0
     })
 
-    objArray.forEach((a) => {
-        a.PRICE = ("Rp" + parseInt(a.PRICE).toString().replace(/\d(?=(\d{3})+$)/g, '$&.'));
-    });
+    objArray.forEach(a => a.PRICE = ("Rp" + parseInt(a.PRICE).toString().replace(/\d(?=(\d{3})+$)/g, '$&.')));
 
     return JSON.stringify(objArray);
 }

@@ -25,7 +25,7 @@ arrayToCount = data.toUpperCase().split(/[\s\n]/g);
 
 function howMany(str) {
     count = 0;
-    arrayToCount.forEach((a) => {
+    arrayToCount.forEach(a => {
         if (a === str.toUpperCase()) {
             count++
         }
