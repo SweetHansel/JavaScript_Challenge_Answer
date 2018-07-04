@@ -5,14 +5,10 @@ let prime = [];
 let x, i;
 
 for (i = 0; i <= 100; i++) {
-    if (i % 2 == 0) {
-        even.push(i);
-    } else {
-        odd.push(i)
-    }
+    if (i % 2 == 0) even.push(i);
+    else odd.push(i);
     if (i % 5 == 0) { fives.push(i) }
-
-    // prima dibawah ini
+    
     x = true;
     if (i >= 1) {
         for (let j = 2; j < i; j++) {
