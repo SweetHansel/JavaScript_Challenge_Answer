@@ -55,53 +55,39 @@ const json = `[
     }
   ]`
 
-let arrOrd = JSON.parse(json);
+const arrOrd = JSON.parse(json);
 
-arrOrd.forEach((a) => {
-    a.created_at = new Date(a.created_at);
-});
+arrOrd.forEach(a => a.created_at = new Date(a.created_at));
+
 function filterMonth(month) {
-    let onlyMonth = arrOrd.filter((a) => {
-        return a.created_at.getMonth() == month;
-    })
+    let onlyMonth = arrOrd.filter(a => a.created_at.getMonth() == month);
     return onlyMonth;
 }
 function itsMe(nama) {
-    let onlyPerson = arrOrd.filter((a) => {
-        return a.customer.name === nama;
-    })
+    let onlyPerson = arrOrd.filter(a => a.customer.name === nama);
     return onlyPerson;
 }
-
 function payUp(arrayToPay) {
     let sum = 0;
-    arrayToPay.forEach((a) => {
-        a.items.forEach((d) => {
-            sum += (d.price) * (d.qty);
-        })
-    })
+    arrayToPay.forEach(a => a.items.forEach(d => sum += (d.price) * (d.qty)));
     return sum;
 }
-
 function underWhat(totalMax) {
     let underThis = [];
-    whatSMyName(arrOrd).forEach((g) => {
+    whatSMyName(arrOrd).forEach(g => {
         if (payUp(itsMe(g)) < totalMax) {
             underThis = underThis.concat(itsMe(g));
         }
     })
     return underThis;
 }
-
 function whatSMyName(someOrd) {
-    let myName = someOrd.map((a) => {
-        return a.customer.name;
-    }).filter((value, index, self) => {
-        return self.indexOf(value) === index;
-    });
+    let myName = someOrd
+        .map(a => a.customer.name)
+        .filter((value, index, self) => self.indexOf(value) === index);
     return myName;
 }
-console.log("Nama Semua : ",whatSMyName(arrOrd))
-console.log("Di Bulan Februari : ",filterMonth(1));
-console.log("Ari Berhutang : ",payUp(itsMe('Ari')));
-console.log("Murahan : ",whatSMyName(underWhat(300000)));
+console.log("Nama Semua : ", whatSMyName(arrOrd))
+console.log("Di Bulan Februari : ", filterMonth(1));
+console.log("Ari Berhutang : ", payUp(itsMe('Ari')));
+console.log("Murahan : ", whatSMyName(underWhat(300000)));
